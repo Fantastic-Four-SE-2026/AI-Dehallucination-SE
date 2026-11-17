@@ -1,0 +1,26 @@
+﻿Backlog ID,Jira key,Epic,Title,Type,Priority,Story points,Sprint,Owner,GitHub user,SRS reference,Component,Test cases
+US-005,SCRUM-21,2. Authentication and Access Control,Web user login and token,NFR,High,5,Sprint 2,Yashwanth,Yash8282,Sec 6.3,C-03,"TC-004, TC-005"
+US-015,SCRUM-31,5. Evidence Retrieval and Source Connectors,Wikidata connector,FR,High,5,Sprint 2,Laxmikant,Laxmikant2007,"FR-09, FR-10",C-08,TC-018
+US-017,SCRUM-33,5. Evidence Retrieval and Source Connectors,Record source info and cache evidence,FR+NFR,Medium,3,Sprint 2,Laxmikant,Laxmikant2007,"FR-10, Sec 6.1",C-07,"TC-020, NFR-002"
+US-023,SCRUM-38,7. Response and Report Generation,Identify and mark unsupported content,FR,High,5,Sprint 2,Gagan,Gagan-kc-10,"FR-19, FR-20",C-10,"TC-030, TC-032"
+US-024,SCRUM-39,7. Response and Report Generation,"Marked response, final response and suggested statement",FR,High,8,Sprint 2,Gagan,Gagan-kc-10,FR-21,C-10,"TC-032, TC-033, TC-034, TC-035"
+US-025,SCRUM-40,7. Response and Report Generation,Overall status and report,FR,High,5,Sprint 2,Gagan,Gagan-kc-10,FR-23 to FR-25,C-10,"TC-028, TC-035, TC-036, TC-037"
+US-026,SCRUM-41,7. Response and Report Generation,Retain original response,FR,Medium,2,Sprint 2,Gagan,Gagan-kc-10,FR-22,"C-10, C-14",TC-038
+US-030,SCRUM-45,8. Verification Orchestration and API,Result endpoints with access rules,FR+NFR,Medium,5,Sprint 2,Yashwanth,Yash8282,"FR-23, Sec 6.5","C-02, C-03","TC-045, TC-046"
+US-031,SCRUM-46,8. Verification Orchestration and API,Persistence failure handling,NFR,Medium,3,Sprint 2,Yashwanth,Yash8282,Sec 6.4,"C-13, C-14","TC-045, TC-047"
+US-032,SCRUM-47,9. Trusted Source Management,Source registry API,FR,Medium,5,Sprint 2,Yashwanth,Yash8282,FR-29,C-11,TC-048
+US-033,SCRUM-48,9. Trusted Source Management,"Enable, disable and safe-remove sources",FR+NFR,Medium,3,Sprint 2,Yashwanth,Yash8282,"FR-29, Sec 6.5",C-11,"TC-019, TC-049"
+US-034,SCRUM-49,9. Trusted Source Management,Restrict source changes to Administrator,FR,Medium,3,Sprint 2,Yashwanth,Yash8282,FR-30,"C-03, C-11",TC-007
+US-035,SCRUM-50,10. Logging and Review,Audit log,FR,Medium,5,Sprint 2,Yashwanth,Yash8282,Sec 5.10,C-13,"TC-047, TC-050"
+US-036,SCRUM-51,10. Logging and Review,Reviewer list of flagged results,FR+NFR,Medium,5,Sprint 2,Laxmikant,Laxmikant2007,"Sec 5.10, Sec 6.5",C-13,TC-051
+US-037,SCRUM-52,10. Logging and Review,Admin log view and data masking,FR+NFR,Medium,3,Sprint 2,Laxmikant,Laxmikant2007,"Sec 5.10, Sec 6.3",C-13,"TC-052, TC-053, NFR-007"
+US-038,SCRUM-53,11. Web UI,Verify page,FR,High,5,Sprint 2,Kushal,kushalj1891-working,Sec 3.1,C-01,"TC-055, NFR-008, NFR-011"
+US-039,SCRUM-54,11. Web UI,Claim-level results view,FR,High,5,Sprint 2,Kushal,kushalj1891-working,FR-23 to FR-25,C-01,"TC-056, NFR-008"
+US-040,SCRUM-55,11. Web UI,Admin source management page,FR,Medium,3,Sprint 2,Kushal,kushalj1891-working,FR-29,C-01,TC-057
+US-041,SCRUM-56,11. Web UI,Reviewer page,FR,Medium,3,Sprint 2,Kushal,kushalj1891-working,Sec 5.10,C-01,TC-058
+US-042,SCRUM-57,11. Web UI,Login page and error messages,FR,Medium,3,Sprint 2,Kushal,kushalj1891-working,Sec 3.1,C-01,"TC-004, TC-054"
+US-044,SCRUM-59,"12. Testing, Documentation and Demo",Consolidated pytest suite,NFR,Medium,5,Sprint 2,Laxmikant,Laxmikant2007,Sec 6.4 (testability),all components,NFR-009
+US-045,SCRUM-60,"12. Testing, Documentation and Demo",Integration and API tests,NFR,Medium,5,Sprint 2,Laxmikant,Laxmikant2007,Sec 6.4 (interoperability),"C-02, C-15","NFR-003, NFR-010"
+US-046,SCRUM-61,"12. Testing, Documentation and Demo",Performance and security tests,NFR,Medium,5,Sprint 2,Gagan,Gagan-kc-10,"Sec 6.1, Sec 6.3",all components,"NFR-001, NFR-002, NFR-006, NFR-007"
+US-047,SCRUM-62,"12. Testing, Documentation and Demo","README, API usage and limitations",NFR,Medium,3,Sprint 2,Kushal,kushalj1891-working,Sec 7,documentation,NFR-011
+US-048,SCRUM-63,"12. Testing, Documentation and Demo",Demo preparation and test execution record,NFR,Medium,3,Sprint 2,Kushal,kushalj1891-working,Sec 7,documentation,
