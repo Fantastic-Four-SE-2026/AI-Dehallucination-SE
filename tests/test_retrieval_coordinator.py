@@ -6,6 +6,7 @@ import pytest
 
 from app.processing.claim_identifier import Claim
 from app.retrieval.coordinator import EvidenceRetrievalCoordinator
+from app.retrieval.wikidata_connector import WikidataConnector
 from app.retrieval.models import (
     Evidence,
     RetrievalStatus,
@@ -250,3 +251,87 @@ async def test_no_enabled_sources_returns_uncertain():
 
     assert results[0].status == RetrievalStatus.UNCERTAIN
     assert results[0].reason == "no enabled sources"
+
+
+@pytest.mark.asyncio
+async def test_wikidata_connector_integrates_with_coordinator(monkeypatch):
+    connector = WikidataConnector()
+
+    responses = [
+        {
+            "search": [
+                {"id": "Q42", "label": "Douglas Adams"}
+            ]
+        },
+        {
+            "entities": {
+                "Q42": {
+                    "labels": {
+                        "en": {"value": "Douglas Adams"}
+                    },
+                    "claims": {
+                        "P19": [
+                            {
+                                "rank": "normal",
+                                "mainsnak": {
+                                    "snaktype": "value",
+                                    "datavalue": {
+                                        "value": {
+                                            "entity-type": "item",
+                                            "id": "Q350",
+                                        }
+                                    },
+                                },
+                            }
+                        ]
+                    },
+                }
+            }
+        },
+        {
+            "entities": {
+                "P19": {
+                    "labels": {
+                        "en": {"value": "place of birth"}
+                    }
+                },
+                "Q350": {
+                    "labels": {
+                        "en": {"value": "Cambridge"}
+                    }
+                },
+            }
+        },
+    ]
+
+    def fake_request_json(params):
+        return responses.pop(0)
+
+    monkeypatch.setattr(
+        connector,
+        "_request_json",
+        fake_request_json,
+    )
+
+    claim = make_claim(
+        "claim_1",
+        "Douglas Adams was born in Cambridge.",
+    )
+
+    coordinator = EvidenceRetrievalCoordinator([connector])
+
+    results = await coordinator.retrieve([claim])
+
+    assert len(results) == 1
+    assert results[0].status == RetrievalStatus.SUCCESS
+    assert results[0].claim_id == "claim_1"
+    assert results[0].request_id == "request_001"
+
+    assert len(results[0].evidence) == 1
+    assert "Douglas Adams" in results[0].evidence[0].snippet
+    assert "Cambridge" in results[0].evidence[0].snippet
+
+    assert results[0].evidence[0].source == "Wikidata"
+    assert results[0].evidence[0].reference == (
+        "https://www.wikidata.org/wiki/Q42"
+    )
