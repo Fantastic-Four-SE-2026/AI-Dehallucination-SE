@@ -117,15 +117,11 @@ def _is_candidate_claim(sentence: str) -> bool:
     return True
 
 
-def extract_claims(text: str) -> list[str]:
+
+def _extract_candidate_spans(text: str) -> list[tuple[str, int, int]]:
     """
-    Extract candidate factual claims from a response.
-
-    Uses spaCy for sentence segmentation and heuristic rules
-    to filter questions, greetings and common opinion statements.
-
-    This function identifies candidate claims; it does not
-    determine whether those claims are factually true.
+    Extract candidate claims with their start and end positions
+    in the input text. End positions are exclusive.
     """
     if not isinstance(text, str):
         raise TypeError("Input text must be a string.")
@@ -134,9 +130,45 @@ def extract_claims(text: str) -> list[str]:
         return []
 
     doc = _nlp(text)
+    claims = []
 
+    for sentence in doc.sents:
+        if not _is_candidate_claim(sentence.text):
+            continue
+
+        start = sentence.start_char
+        end = sentence.end_char
+
+        # Exclude surrounding whitespace from the claim span.
+        while start < end and text[start].isspace():
+            start += 1
+
+        while end > start and text[end - 1].isspace():
+            end -= 1
+
+        if start < end:
+            claims.append((text[start:end], start, end))
+
+    return claims
+
+
+def extract_claims(text: str) -> list[str]:
+    """
+    Extract candidate factual claims from a response.
+
+    Preserves the existing list-of-strings interface.
+    """
     return [
-        sentence.text.strip()
-        for sentence in doc.sents
-        if _is_candidate_claim(sentence.text)
+        claim_text
+        for claim_text, _, _ in _extract_candidate_spans(text)
     ]
+
+
+def extract_claim_spans(text: str) -> list[tuple[str, int, int]]:
+    """
+    Extract candidate factual claims with their text positions.
+
+    Returns (claim_text, start_offset, end_offset).
+    Offsets are zero-based and end-exclusive.
+    """
+    return _extract_candidate_spans(text)
